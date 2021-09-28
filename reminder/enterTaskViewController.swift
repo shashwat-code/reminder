@@ -34,15 +34,29 @@ class enterTaskViewController: UIViewController {
         view.addSubview(desc)
         view.addSubview(date)
         title = "New Reminder"
-    
+        date.preferredDatePickerStyle = .wheels
         view.backgroundColor = .white
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveTask))
+    }
+    
+    @objc func saveTask(){
+        guard let title = self.textField.text else{
+            return
+        }
+        let des = self.desc.text!
+        let date = self.date.date
+        //let time  = self.date.timeZone
+        print(title, des, date)
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         textField.frame = CGRect(x: 5, y: 200, width: view.frame.size.width - 10 , height: 50)
         desc.frame = CGRect(x: 5, y: textField.frame.maxY + 20, width: textField.frame.size.width, height: 50)
-        date.frame = CGRect(x: 5, y: desc.frame.maxY + 20, width: textField.frame.size.width, height: 50)
+        date.frame = CGRect(x: 5, y: desc.frame.maxY + 20, width: textField.frame.size.width, height: 150)
+        
     }
+    
+    
     
 
     /*
