@@ -8,6 +8,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(table)
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound]) { success, error in
+            if(success){
+               print("success")
+            }else if let error = error{
+                print(error)
+            }
+        }
+        
         table.delegate = self
         table.dataSource = self
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -20,22 +28,17 @@ class ViewController: UIViewController {
     
     @objc func didTapTestButton(){
         print("play button tapped")
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound]) { success, error in
-            if(success){
-                self.scheduleTest()
-            }else if let error = error{
-                print(error)
-            }
-        }
+        
     }
     
-    func scheduleTest(){
+    func scheduleTest(title:String,body:String,date:Date){
+        
         let content = UNMutableNotificationContent()
-        content.title = "creating first notification"
+        content.title = title
         content.badge = 100
-        content.body = "long text is written here please help me read it it's too large to read.!!"
+        content.body = body
         content.sound = .default
-        let date = Date().addingTimeInterval(5)
+        let date = date
         let trigger =  UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour,.year,.second,.day,.minute,.month],
                                                                                                    from: date),
                                                      repeats: false)
@@ -51,7 +54,17 @@ class ViewController: UIViewController {
     }
     @objc func didTapAddButton(){
         print("add button tapped")
-        guard let vc = storyboard?.instantiateViewController(identifier: "enterTask") else { return  }
+        guard let vc = storyboard?.instantiateViewController(identifier: "enterTask") as? enterTaskViewController else { return  }
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.completion = { title,description,Date in
+            DispatchQueue.main.async {
+                vc.navigationController?.popViewController(animated: true)
+                let r = reminder(title: title, description: description, date: Date, identifier: "id_\(title)")
+                self.models.append(r)
+                self.table.reloadData()
+                self.scheduleTest(title: title, body: description, date: Date)
+            }
+        }
         navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -64,15 +77,15 @@ class ViewController: UIViewController {
 
 extension ViewController:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return models.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = table.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.text = "shashwat"
-        cell.detailTextLabel?.text = "shruti"
+        cell.textLabel?.text = models[indexPath.row].title
+        cell.detailTextLabel?.text = models[indexPath.row].description
         return cell
     }
     

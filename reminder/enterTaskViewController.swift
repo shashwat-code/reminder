@@ -9,6 +9,7 @@ import UIKit
 
 class enterTaskViewController: UIViewController {
     
+    public var completion:((String,String,Date)->Void)?
     
     var textField:UITextField = {
         let text = UITextField()
@@ -45,8 +46,13 @@ class enterTaskViewController: UIViewController {
         }
         let des = self.desc.text!
         let date = self.date.date
-        //let time  = self.date.timeZone
+        //let today = Date()
+        var modifiedDate = Calendar.current.date(byAdding: .hour, value: 5, to: date)!
+        modifiedDate = Calendar.current.date(byAdding: .minute, value: 30, to: modifiedDate)!
+        print("mod: \(modifiedDate)")
+        //print(today)
         print(title, des, date)
+        completion?(title,des,date)
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
