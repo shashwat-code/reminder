@@ -15,6 +15,7 @@
 		E40CE6432702EF6000ED7DCF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E40CE6412702EF6000ED7DCF /* LaunchScreen.storyboard */; };
 		E40CE64E2702EF6100ED7DCF /* reminderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40CE64D2702EF6100ED7DCF /* reminderTests.swift */; };
 		E40CE6592702EF6100ED7DCF /* reminderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40CE6582702EF6100ED7DCF /* reminderUITests.swift */; };
+		E40CE6672702F9F900ED7DCF /* enterTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40CE6662702F9F900ED7DCF /* enterTaskViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		E40CE6542702EF6100ED7DCF /* reminderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = reminderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E40CE6582702EF6100ED7DCF /* reminderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminderUITests.swift; sourceTree = "<group>"; };
 		E40CE65A2702EF6100ED7DCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E40CE6662702F9F900ED7DCF /* enterTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enterTaskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				E40CE63C2702EF5D00ED7DCF /* Main.storyboard */,
 				E40CE63F2702EF6000ED7DCF /* Assets.xcassets */,
 				E40CE6412702EF6000ED7DCF /* LaunchScreen.storyboard */,
+				E40CE6662702F9F900ED7DCF /* enterTaskViewController.swift */,
 				E40CE6442702EF6000ED7DCF /* Info.plist */,
 			);
 			path = reminder;
@@ -258,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E40CE6672702F9F900ED7DCF /* enterTaskViewController.swift in Sources */,
 				E40CE63B2702EF5D00ED7DCF /* ViewController.swift in Sources */,
 				E40CE6372702EF5D00ED7DCF /* AppDelegate.swift in Sources */,
 				E40CE6392702EF5D00ED7DCF /* SceneDelegate.swift in Sources */,
