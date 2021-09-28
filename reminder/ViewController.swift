@@ -85,7 +85,9 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate{
         cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.text = models[indexPath.row].title
-        cell.detailTextLabel?.text = models[indexPath.row].description
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd, MMM, YYYY at hh:mm"
+        cell.detailTextLabel?.text = formatter.string(from: models[indexPath.row].date)
         return cell
     }
     
